@@ -10,7 +10,26 @@ CREATE TABLE jobs (
     min_salary FLOAT,
     max_salary FLOAT,
     salary_unit VARCHAR(10),
-    tag TEXT
+    tag TEXT,
+    job_description TEXT,
+    time_published TEXT
+);
+
+CREATE TABLE jobs_sent (
+    created_date DATE,
+    job_title TEXT,
+    company TEXT,
+    salary TEXT,
+    address TEXT,
+    link_description TEXT,
+    city VARCHAR(50),
+    district VARCHAR(50),
+    min_salary FLOAT,
+    max_salary FLOAT,
+    salary_unit VARCHAR(10),
+    tag TEXT,
+    job_description TEXT,
+    time_published TEXT
 );
 
 

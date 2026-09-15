@@ -34,7 +34,9 @@ job_detail_records = [
         item.get("min_salary"),
         item.get("max_salary"),
         item.get("salary_unit"),
-        item.get("tag")
+        item.get("tag"),
+        item.get("job_description"),
+        item.get("time_published")
     )
     for item in df.to_dict(orient="records")
 ]
@@ -75,9 +77,11 @@ try:
                     min_salary,
                     max_salary,
                     salary_unit,
-                    tag
+                    tag,
+                    job_description,
+                    time_published
                 )
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
                 """
             ),
             seq_params=job_detail_records

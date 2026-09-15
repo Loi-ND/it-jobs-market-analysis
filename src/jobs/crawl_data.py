@@ -38,6 +38,10 @@ def create_driver():
     return driver
 
 def processing_job_item(job_item: WebElement, driver: uc.Chrome):
+    time_published_txt = job_item.find_element(
+        by=By.CSS_SELECTOR,
+        value="div.icon > label"
+    ).get_attribute("data-original-title")
 
     tag = job_item.find_element(
         by=By.CSS_SELECTOR,
@@ -87,6 +91,22 @@ def processing_job_item(job_item: WebElement, driver: uc.Chrome):
 
         time.sleep(1)
 
+    contents = box_view_job_detail.find_elements(
+        By.CSS_SELECTOR,
+        "div.box-job-info > div.content-tab"
+    )
+
+    titles = [
+        "Mô tả công việc",
+        "Yêu cầu ứng viên",
+        "Quyền lợi"
+    ]
+
+    job_description_txt = "\n\n".join(
+        f"{title}:\n{content.text.strip()}"
+        for title, content in zip(titles, contents[:3])
+    )
+
     title_txt = box_view_job_detail.find_element(
         by=By.CSS_SELECTOR,
         value="div.box-header h2.title"
@@ -126,7 +146,9 @@ def processing_job_item(job_item: WebElement, driver: uc.Chrome):
         "salary": salary_txt,
         "address": address_txt,
         "link_description": link_description_txt,
-        "tag": tag_txt
+        "tag": tag_txt,
+        "job_description": job_description_txt,
+        "time_published": time_published_txt
     }
 
 def main():
